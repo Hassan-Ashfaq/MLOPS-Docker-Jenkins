@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
-import xgboost as xg
+# import xgboost as xg
+from sklearn.ensemble import RandomForestRegressor
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
@@ -12,9 +13,9 @@ def Train():
     data['Month'] = data['DATE'].dt.month
     data['Year'] = data['DATE'].dt.year
 
-    model = xg.XGBRegressor(
-        objective ='reg:squarederror',
-        n_estimators = 600
+    model = RandomForestRegressor(
+        max_depth=8, 
+        random_state=0
     ).fit(
         data[['Day', 'Month', 'Year']],
         data['IPG2211A2N']
