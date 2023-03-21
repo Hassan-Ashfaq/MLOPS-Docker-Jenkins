@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="refresh" content="1" /> 
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<title>Live Chart</title>
+</head>
+
+<body>
+  <center>
+    <div style="height: 90vh; width: 90%;">
+      <canvas id="myChart"></canvas>
+    </div>
+  </center>
+	<script>
+		const labels = {{ X | tojson}};
+
+		const data = {
+			labels: labels,
+			datasets: [{
+				label: 'Electric Production',
+				backgroundColor: 'rgb(255, 99, 132)',
+				borderColor: 'rgb(255, 99, 132)',
+				data: {{ Y | tojson}},
+			}]
+		};
+
+		const config = {
+			type: 'line',
+			data: data,
+			options: { maintainAspectRatio: false }
+		};
+
+		const myChart = new Chart(
+			document.getElementById('myChart'),
+			config
+		);
+
+	</script>
+
+  <p>
+</body>
+</html>
